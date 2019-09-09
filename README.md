@@ -1,3 +1,6 @@
+# React with Firebase Hosting, Firebase Auth and Firebase Realtime Database
+How to deploy a React application to Firebase Hosting, authenticate with Firebase Auth and manage users with Firebase Realtime Database
+
 ## Run
 
 In the project directory, run:
