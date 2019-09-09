@@ -7,5 +7,6 @@ const AccountPage = () => (
         <PasswordForgetForm />
         <PasswordChangeForm />
     </div>
+
 );
 export default AccountPage;
