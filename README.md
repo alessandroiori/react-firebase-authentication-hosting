@@ -1,6 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Sources
+- [A Firebase in React Tutorial for Beginners [2019]](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial)
+- [How to deploy a React application to Firebase](https://www.robinwieruch.de/firebase-deploy-react-js)
 
-## Available Scripts
+
+## Available Firebase Hosting Scripts
+
+In the project directory, you can run:
+
+### `firebase deploy`
+
+Deploy React application with Firebase.
+If you only see a blank page for your deployed React application, see if the public key/value pair in the firebase.json is set to build. That's the case if your build folder has the name build. If it has another name, set the value to this. Second, check if you have ran the build script of your React app with npm run build. After you have done both steps, try another deployment with firebase deploy. That should get your recent React build up and running for Firebase Hosting
+
+## Available React Scripts
 
 In the project directory, you can run:
 
