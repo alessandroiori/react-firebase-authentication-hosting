@@ -39,3 +39,4 @@ In the project directory, run:
 ## Sources
 - [A Firebase in React Tutorial for Beginners [2019]](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial)
 - [How to deploy a React application to Firebase](https://www.robinwieruch.de/firebase-deploy-react-js)
+- [The Road to React with Firebase (book)](https://github.com/alessandroiori/react-firebase-hosting-auth-realtimedb/blob/master/the-road-to-react-with-firebase.pdf)
