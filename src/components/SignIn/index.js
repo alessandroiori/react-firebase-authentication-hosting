@@ -94,14 +94,20 @@ class SignInGoogleBase extends Component {
         this.props.firebase
             .doSignInWithGoogle()
             .then(socialAuthUser => {
-                // Create a user in your Firebase Realtime Database too
-                return this.props.firebase
-                    .user(socialAuthUser.user.uid)
-                    .set({
-                        username: socialAuthUser.user.displayName,
-                        email: socialAuthUser.user.email,
-                        roles: {},
-                    })
+                if(socialAuthUser.additionalUserInfo.isNewUser)
+                {
+                    // Create a user in your Firebase Realtime Database too
+                    return this.props.firebase
+                        .user(socialAuthUser.user.uid)
+                        .set({
+                            username: socialAuthUser.user.displayName,
+                            email: socialAuthUser.user.email,
+                            roles: {},
+                        })
+                } else {
+                    // Return a user from your Firebase Realtime Database
+                    return this.props.firebase.user(socialAuthUser.user.uid)
+                }
             })
             .then(() => {
                 this.setState({ error: null });
@@ -138,14 +144,20 @@ class SignInFacebookBase extends Component {
         this.props.firebase
             .doSignInWithFacebook()
             .then(socialAuthUser => {
-                // Create a user in your Firebase Realtime Database too
-                return this.props.firebase
-                    .user(socialAuthUser.user.uid)
-                    .set({
-                        username: socialAuthUser.additionalUserInfo.profile.name,
-                        email: socialAuthUser.additionalUserInfo.profile.email,
-                        roles: {},
-                    })
+                if(socialAuthUser.additionalUserInfo.isNewUser)
+                {
+                    // Create a user in your Firebase Realtime Database too
+                    return this.props.firebase
+                        .user(socialAuthUser.user.uid)
+                        .set({
+                            username: socialAuthUser.user.displayName,
+                            email: socialAuthUser.user.email,
+                            roles: {},
+                        })
+                } else {
+                    // Return a user from your Firebase Realtime Database
+                    return this.props.firebase.user(socialAuthUser.user.uid)
+                }
             })
             .then(() => {
                 this.setState({ error: null });
