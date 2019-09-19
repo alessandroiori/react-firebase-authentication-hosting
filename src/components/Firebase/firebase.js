@@ -9,6 +9,7 @@ const prodConfig = {
     projectId: process.env.REACT_APP_PROD_PROJECT_ID,
     storageBucket: process.env.REACT_APP_PROD_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_PROD_MESSAGING_SENDER_ID,
+    confirmationEmailRedirect: process.env.REACT_APP_PROD_CONFIRMATION_EMAIL_REDIRECT,
 };
 const devConfig = {
     apiKey: process.env.REACT_APP_DEV_API_KEY,
@@ -17,6 +18,7 @@ const devConfig = {
     projectId: process.env.REACT_APP_DEV_PROJECT_ID,
     storageBucket: process.env.REACT_APP_DEV_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_DEV_MESSAGING_SENDER_ID,
+    confirmationEmailRedirect: process.env.REACT_APP_DEV_CONFIRMATION_EMAIL_REDIRECT,
 };
 
 const config =
@@ -54,6 +56,11 @@ class Firebase {
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
 
+    doSendEmailVerification = () =>
+        this.auth.currentUser.sendEmailVerification({
+            url: config.confirmationEmailRedirect,
+        });
+
     // *** Merge Auth and DB User API *** //
 
     onAuthUserListener = (next, fallback) =>
@@ -73,6 +80,8 @@ class Firebase {
                         authUser = {
                             uid: authUser.uid,
                             email: authUser.email,
+                            emailVerified: authUser.emailVerified,
+                            providerData: authUser.providerData,
                             ...dbUser,
                         };
 

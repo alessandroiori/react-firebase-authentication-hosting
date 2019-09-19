@@ -52,9 +52,11 @@ class SignInFormBase extends Component {
             });
         event.preventDefault();
     };
+
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
+
     render() {
         const { email, password, error } = this.state;
         const isInvalid = password === '' || email === '';
