@@ -128,6 +128,7 @@ class LoginManagementBase extends Component {
 
         this.state = {
             activeSignInMethods: [],
+            loading: true,
             error: null,
         }
     }
@@ -140,7 +141,7 @@ class LoginManagementBase extends Component {
         this.props.firebase.auth
             .fetchSignInMethodsForEmail(this.props.authUser.email)
             .then(activeSignInMethods =>
-                this.setState({ activeSignInMethods, error: null }),
+                this.setState({ activeSignInMethods, loading: false, error: null }),
             )
             .catch(error => this.setState({ error }));
     };
@@ -172,39 +173,43 @@ class LoginManagementBase extends Component {
     };
 
     render() {
-        const { activeSignInMethods, error } = this.state;
+        const { activeSignInMethods, loading, error } = this.state;
 
         return (
             <div>
                 Sign In Methods:
-                <ul>
-                    {SIGN_IN_METHODS.map(signInMethod => {
-                        const onlyOneLeft = activeSignInMethods.length === 1;
-                        const isEnabled = activeSignInMethods.includes(
-                            signInMethod.id,
-                        );
+                { loading ? (
+                    <div>Loading...</div>
+                ):(
+                    <ul>
+                        {SIGN_IN_METHODS.map(signInMethod => {
+                            const onlyOneLeft = activeSignInMethods.length === 1;
+                            const isEnabled = activeSignInMethods.includes(
+                                signInMethod.id,
+                            );
 
-                        return (
-                            <li key={signInMethod.id}>
-                                {signInMethod.id === 'password' ? (
-                                    <DefaultLoginToggle
-                                        onlyOneLeft={onlyOneLeft}
-                                        isEnabled={isEnabled}
-                                        signInMethod={signInMethod}
-                                        onLink={this.onDefaultLoginLink}
-                                        onUnlink={this.onUnlink}
-                                    /> ):(
-                                    <SocialLoginToggle
-                                        onlyOneLeft={onlyOneLeft}
-                                        isEnabled={isEnabled}
-                                        signInMethod={signInMethod}
-                                        onLink={this.onSocialLoginLink}
-                                        onUnlink={this.onUnlink}
-                                    /> )}
-                            </li>
-                        );
-                    })}
-                </ul>
+                            return (
+                                <li key={signInMethod.id}>
+                                    {signInMethod.id === 'password' ? (
+                                        <DefaultLoginToggle
+                                            onlyOneLeft={onlyOneLeft}
+                                            isEnabled={isEnabled}
+                                            signInMethod={signInMethod}
+                                            onLink={this.onDefaultLoginLink}
+                                            onUnlink={this.onUnlink}
+                                        /> ):(
+                                        <SocialLoginToggle
+                                            onlyOneLeft={onlyOneLeft}
+                                            isEnabled={isEnabled}
+                                            signInMethod={signInMethod}
+                                            onLink={this.onSocialLoginLink}
+                                            onUnlink={this.onUnlink}
+                                        /> )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                )}
                 {error && error.message}
             </div>
         );
