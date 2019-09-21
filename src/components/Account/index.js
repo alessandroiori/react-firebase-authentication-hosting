@@ -216,7 +216,6 @@ class LoginManagementBase extends Component {
     }
 }
 
-
 const LoginManagement = withFirebase(LoginManagementBase)
 
 const condition = authUser => !!authUser;
