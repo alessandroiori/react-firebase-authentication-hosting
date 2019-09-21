@@ -117,6 +117,10 @@ class UserItemBase extends Component {
         this.props.firebase.user(this.props.match.params.id).off();
     }
 
+    onSendPasswordResetEmail = () => {
+        this.props.firebase.doPasswordReset(this.state.user.email);
+    };
+
     render() {
         const { user, loading } = this.state;
 
@@ -135,6 +139,14 @@ class UserItemBase extends Component {
                         </span>
                         <span>
                             <strong>Username:</strong> {user.username}
+                        </span>
+                        <span>
+                            <button
+                                type="button"
+                                onClick={this.onSendPasswordResetEmail}
+                            >
+                                Send Password Reset
+                            </button>
                         </span>
                     </div>
                 )}
