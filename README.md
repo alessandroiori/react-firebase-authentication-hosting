@@ -27,6 +27,33 @@ How to deploy a React application to Firebase Hosting, authenticate with Firebas
 
 ### Reset Password from email
 ![Reset Password](https://github.com/alessandroiori/react-firebase-hosting-auth-realtimedb/blob/master/readme_img/9.png)
+
+# Before run
+Define the project environmental variables in a new .env file in your project’s root folder. The .env file was added to .gitignore file. Copying the configuration from your Firebase project’s dashboard. The .env file content:
+
+```
+NODE_ENV=production
+
+REACT_APP_PROD_API_KEY=AAAAAAAAAAAAAAAAAAA
+REACT_APP_PROD_AUTH_DOMAIN=AAAAAAAAAAAAAAAA.firebaseapp.com
+REACT_APP_PROD_DATABASE_URL=https://AAAAAAAAAAAAAAAA.firebaseio.com
+REACT_APP_PROD_PROJECT_ID=AAAAAAAAAAAAAAAA
+REACT_APP_PROD_STORAGE_BUCKET=
+REACT_APP_PROD_MESSAGING_SENDER_ID=AAAAAAAAAAAAAAAA
+REACT_APP_PROD_APP_ID=A:AAAAAAAAAAAAAAAA:web:AAAAAAAAAAAAAAAA
+REACT_APP_PROD_CONFIRMATION_EMAIL_REDIRECT=https://AAAAAAAAAAAAAAAA.firebaseapp.com/
+
+
+REACT_APP_DEV_API_KEY=AAAAAAAAAAAAAAAA
+REACT_APP_DEV_AUTH_DOMAIN=AAAAAAAAAAAAAAAA.firebaseapp.com
+REACT_APP_DEV_DATABASE_URL=https://AAAAAAAAAAAAAAAA.firebaseio.com
+REACT_APP_DEV_PROJECT_ID=AAAAAAAAAAAAAAAA
+REACT_APP_DEV_STORAGE_BUCKET=
+REACT_APP_DEV_MESSAGING_SENDER_ID=AAAAAAAAAAAAAAAA
+REACT_APP_DEV_APP_ID=1:AAAAAAAAAAAAAAAA:web:AAAAAAAAAAAAAAAA
+REACT_APP_DEV_CONFIRMATION_EMAIL_REDIRECT=http://localhost:3000
+```
+
 ## Run
 In the project directory, run:
 
