@@ -31,7 +31,7 @@ const AccountPage = () => (
                 <PasswordForgetForm />
                 <PasswordChangeForm />
                 <LoginManagement authUser={authUser} />
-                <DeleteUser />
+                <DeleteUser authUser={authUser} />
             </div>
         )}
     </AuthUserContext.Consumer>
@@ -70,14 +70,13 @@ class DeleteUserBase extends Component {
 
     onSubmit = event => {
 
+        const userUid = this.props.authUser.uid;
+
         this.props.firebase
             .doDeleteUser()
-            .then(socialAuthUser => {
+            .then(() => {
                 return this.props.firebase
-                    .user(socialAuthUser.user.uid)
-                    .set({
-                        state: 'delete'
-                    })
+                    .user(userUid).set(null);
             })
             .then(() => {
                 this.setState({ error: null });
@@ -258,6 +257,8 @@ class LoginManagementBase extends Component {
 
 const LoginManagement = withFirebase(LoginManagementBase);
 const DeleteUser = withFirebase(DeleteUserBase);
+
+
 
 const condition = authUser => !!authUser;
 
