@@ -61,6 +61,10 @@ class Firebase {
             url: config.confirmationEmailRedirect,
         });
 
+    // https://firebase.google.com/docs/auth/web/manage-users#delete_a_user
+    doDeleteUser = () =>
+        this.auth.currentUser.delete();
+
     // *** Merge Auth and DB User API *** //
 
     onAuthUserListener = (next, fallback) =>

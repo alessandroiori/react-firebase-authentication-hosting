@@ -132,7 +132,8 @@ class SignInGoogleBase extends Component {
                 <button type="submit">Sign In with Google</button>
                 {error && <p>{error.message}</p>}
             </form>
-        ); }
+        );
+    }
 }
 
 class SignInFacebookBase extends Component {

@@ -6,6 +6,7 @@ import { AuthUserContext, withAuthorization, withEmailVerification } from '../Se
 import { withFirebase } from '../Firebase';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
+import * as ROUTES from "../../constants/routes";
 
 
 const SIGN_IN_METHODS = [
@@ -30,6 +31,7 @@ const AccountPage = () => (
                 <PasswordForgetForm />
                 <PasswordChangeForm />
                 <LoginManagement authUser={authUser} />
+                <DeleteUser />
             </div>
         )}
     </AuthUserContext.Consumer>
@@ -59,6 +61,44 @@ const SocialLoginToggle = ({
         </button>
     );
 
+class DeleteUserBase extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { error: null };
+    }
+
+    onSubmit = event => {
+
+        this.props.firebase
+            .doDeleteUser()
+            .then(socialAuthUser => {
+                return this.props.firebase
+                    .user(socialAuthUser.user.uid)
+                    .set({
+                        state: 'delete'
+                    })
+            })
+            .then(() => {
+                this.setState({ error: null });
+                this.props.history.push(ROUTES.LANDING); })
+            .catch(error => {
+                this.setState({ error });
+            });
+
+        event.preventDefault();
+    };
+
+    render() {
+        const { error } = this.state;
+        return (
+            <form onSubmit={this.onSubmit}>
+                <button type="submit">Delete Account</button>
+                {error && <p>{error.message}</p>}
+            </form>
+        );
+    }
+}
 
 class DefaultLoginToggle extends Component {
     constructor(props) {
@@ -216,7 +256,8 @@ class LoginManagementBase extends Component {
     }
 }
 
-const LoginManagement = withFirebase(LoginManagementBase)
+const LoginManagement = withFirebase(LoginManagementBase);
+const DeleteUser = withFirebase(DeleteUserBase);
 
 const condition = authUser => !!authUser;
 
