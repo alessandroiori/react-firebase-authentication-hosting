@@ -19,7 +19,7 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 
 const SignInPage = () => (
     <div>
-        <h1>SignIn</h1>
+        <h1>Sign In</h1>
         <SignInForm />
         <SignInGoogle />
         <SignInFacebook />
